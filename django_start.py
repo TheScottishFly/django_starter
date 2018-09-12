@@ -1,4 +1,5 @@
 #!/Users/grosnet-/.brew/bin/python3
+#!/usr/bin/python3
 
 import os, argparse
 
