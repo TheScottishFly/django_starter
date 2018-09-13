@@ -2,20 +2,29 @@
 #!/usr/bin/python3
 
 import os, argparse
+from importlib import import_module
+from re import sub, search
 
 def make_project(name):
     os.system("pip3 install -r requirements.txt")
     os.system("python3 -m django startproject {}".format(name))
+    with open("{}/{}/settings.py".format(name, name), "a") as file:
+        file.write("from .additionals import ADD_APPS\nINSTALLED_APPS += ADD_APPS\n")
     os.mkdir("{}/apps".format(name))
+    with open("{}/{}/additionals.py".format(name, name), "a") as f:
+            f.write("APPS_ADD = [\n    'commands',\n]\n")
+    os.mkdir("{}/apps/commands".format(name))
+    os.system("python3 -m django startapp commands {}/apps/commands".format(name))
+    os.makedirs("{}/apps/commands/management/commands".format(name))
+    os.system("touch {}/apps/commands/management/__init__.py {}/apps/commands/management/commands/__init__.py".format(name, name))
+    os.system("mv apps.py {}/apps/commands/management/commands".format(name))
 
-def make_app(proj, name):
+def make_wdir_app(proj, name):
     os.mkdir("{}/apps/{}".format(proj, name))
     os.system("python3 -m django startapp {} {}/apps/{}".format(name, proj, name))
 
-def write_app(proj, name):
+def write_url_app(proj, name):
     pass
-
-def write_url()
 
 def main():
     parser = argparse.ArgumentParser()
@@ -25,8 +34,7 @@ def main():
     if len(args.project) > 0:
         make_project(args.project)
         for app in args.apps:
-            make_app(args.project, app)
-            write_app(args.project, app)
+            make_wdir_app(args.project, app)
     else:
         parser.print_help()
 
