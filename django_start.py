@@ -12,7 +12,7 @@ def make_project(name):
         file.write("from .additionals import ADD_APPS\nINSTALLED_APPS += ADD_APPS\n")
     os.mkdir("{}/apps".format(name))
     with open("{}/{}/additionals.py".format(name, name), "a") as f:
-            f.write("APPS_ADD = [\n    'commands',\n]\n")
+            f.write("ADD_APPS = [\n    'commands',\n]\n")
     os.mkdir("{}/apps/commands".format(name))
     os.system("python3 -m django startapp commands {}/apps/commands".format(name))
     os.makedirs("{}/apps/commands/management/commands".format(name))
