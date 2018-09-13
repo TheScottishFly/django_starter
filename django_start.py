@@ -17,14 +17,11 @@ def make_project(name):
     os.system("python3 -m django startapp commands {}/apps/commands".format(name))
     os.makedirs("{}/apps/commands/management/commands".format(name))
     os.system("touch {}/apps/commands/management/__init__.py {}/apps/commands/management/commands/__init__.py".format(name, name))
-    os.system("mv apps.py {}/apps/commands/management/commands".format(name))
+    os.system("mv add_app.py {}/apps/commands/management/commands".format(name))
 
 def make_wdir_app(proj, name):
     os.mkdir("{}/apps/{}".format(proj, name))
     os.system("python3 -m django startapp {} {}/apps/{}".format(name, proj, name))
-
-def write_url_app(proj, name):
-    pass
 
 def main():
     parser = argparse.ArgumentParser()
