@@ -9,6 +9,11 @@ def make_project(name):
     os.system("pip3 install -r requirements.txt")
     os.system("python3 -m django startproject {}".format(name))
     with open("{}/{}/settings.py".format(name, name), "a") as file:
+        file.seek(14, 0)
+        file.write("import sys\n")
+        file.seek(17, 0)
+        file.write("PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))\nROOT_DIR = os.path.dirname(PROJECT_DIR)\nAPPS_DIR = os.path.realpath(os.path.join(ROOT_DIR, 'apps'))\nsys.path.append(APPS_DIR)\n")
+        file.seek(0, 2)
         file.write("from .additionals import ADD_APPS\nINSTALLED_APPS += ADD_APPS\n")
     os.mkdir("{}/apps".format(name))
     with open("{}/{}/additionals.py".format(name, name), "a") as f:
