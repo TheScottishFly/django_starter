@@ -6,11 +6,14 @@ class Command(BaseCommand):
     args = '<app_name>'
     help = "App name to be added"
 
+    def add_arguments(self, parser):
+        parser.add_argument('app_name', nargs='+', type=str)
+
     def handle(self, *args, **kwargs):
         try:
             base = settings.BASE_DIR
             proj = settings.BASE_DIR.split("/")[-1]
-            name = args[0]
+            name = kwargs['app_name']
         except:
             self.stdout.write("WARNING !!")
         with open("{}/{}/additionals.py".format(base, proj), "w+") as f:
