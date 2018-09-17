@@ -22,8 +22,7 @@ def make_project(name):
     os.system("mv add_app.py {}/apps/commands/management/commands".format(name))
 
 def make_wdir_app(proj, name):
-    os.mkdir("{}/apps/{}".format(proj, name))
-    os.system("python3 -m django startapp {} {}/apps/{}".format(name, proj, name))
+    os.system("python3 {}/manage.py add_app {}".format(proj, name))
 
 def main():
     parser = argparse.ArgumentParser()
