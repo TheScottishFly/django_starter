@@ -1,7 +1,7 @@
 #!/Users/grosnet-/.brew/bin/python3
 #!/usr/bin/python3
 
-import os, argparse
+import os, argparse, json
 from importlib import import_module
 from re import sub, search
 
@@ -14,7 +14,8 @@ def make_project(name):
         file.write("\nfrom .additionals import ADD_APPS\nINSTALLED_APPS += ADD_APPS\n")
     os.mkdir("{}/apps".format(name))
     with open("{}/{}/additionals.py".format(name, name), "a") as f:
-            f.write("ADD_APPS = [\n    'commands',\n]\n")
+        f.write("ADD_APPS = ")
+        json.dumps(ADD_APPS, f, indent=4)
     os.mkdir("{}/apps/commands".format(name))
     os.system("python3 -m django startapp commands {}/apps/commands".format(name))
     os.makedirs("{}/apps/commands/management/commands".format(name))
