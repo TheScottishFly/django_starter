@@ -27,8 +27,8 @@ class Command(BaseCommand):
             json.dump(input, f)
         os.mkdir("{}/apps/{}".format(base, name))
         os.system("python3 -m django startapp {} {}/apps/{}".format(name, base, name))
-        with open("{}/apps/{}/urls.py".format(name, base, name), "a+") as f:
+        with open("{}/apps/{}/urls.py".format(name, base, name), "w+") as f:
             f.write("from django.urls import path\n\nurlpatterns = [\n\n]\n")
-        with open("{}/apps/{}/forms.py".format(name, base, name), "a+") as f:
+        with open("{}/apps/{}/forms.py".format(name, base, name), "w+") as f:
             f.write("from django import forms\n\n")
         self.stdout.write("{} added !".format(name))
