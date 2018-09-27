@@ -15,7 +15,7 @@ def make_project(name):
     os.mkdir("{}/apps".format(name))
     with open("{}/{}/additionals.py".format(name, name), "a") as f:
         f.write("ADD_APPS = ")
-        json.dumps(["commands"], f, indent=4)
+        json.dump(["commands"], f)
     os.mkdir("{}/apps/commands".format(name))
     os.system("python3 -m django startapp commands {}/apps/commands".format(name))
     os.makedirs("{}/apps/commands/management/commands".format(name))
