@@ -20,6 +20,7 @@ class Command(BaseCommand):
             f.seek(0)
             input = "".join(f.readlines())
             input = input[11:]
+            input = json.loads(input)
             input.append(name)
         with open("{}/{}/additionals.py".format(base, proj), "w+") as f:
             f.write("ADD_APPS = ")
