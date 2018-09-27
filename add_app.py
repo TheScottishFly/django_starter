@@ -13,7 +13,7 @@ class Command(BaseCommand):
         try:
             base = settings.BASE_DIR
             proj = settings.BASE_DIR.split("/")[-1]
-            name = kwargs['app_name']
+            name = kwargs['app_name'][0]
         except:
             self.stdout.write("WARNING !!")
         with open("{}/{}/additionals.py".format(base, proj), "a+") as f:
