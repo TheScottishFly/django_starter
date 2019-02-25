@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
-import os, json
+import os
+import json
+
 
 class Command(BaseCommand):
     args = '<app_name>'

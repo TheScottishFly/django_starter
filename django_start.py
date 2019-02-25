@@ -1,9 +1,5 @@
-#!/Users/grosnet-/.brew/bin/python3
-#!/usr/bin/python3
-
 import os, argparse, json
-from importlib import import_module
-from re import sub, search
+
 
 def make_project(name):
     os.system("pip3 install -r requirements.txt")
@@ -21,9 +17,12 @@ def make_project(name):
     os.makedirs("{}/apps/commands/management/commands".format(name))
     os.system("touch {}/apps/commands/management/__init__.py {}/apps/commands/management/commands/__init__.py".format(name, name))
     os.system("mv add_app.py {}/apps/commands/management/commands".format(name))
+    os.system("cp requirements.txt {}".format(name))
+
 
 def make_wdir_app(proj, name):
     os.system("python3 {}/manage.py add_app {}".format(proj, name))
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -36,6 +35,7 @@ def main():
             make_wdir_app(args.project, app)
     else:
         parser.print_help()
+
 
 if __name__ == '__main__':
     main()

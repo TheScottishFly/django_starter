@@ -1,8 +1,6 @@
 django
-django-debug-toolbar
-pypugjs
+django-rest-framework
 requests
-uvicorn
 libsass
 django-compressor
 django-sass-processor
